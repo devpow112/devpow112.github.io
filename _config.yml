@@ -8,9 +8,10 @@ header_pages:
   - _pages/about.md
 
 # build settings
-theme: minima
+remote_theme: jekyll/minima
 plugins:
   - jekyll-feed
+  - jekyll-remote-theme
 include:
   - _pages
 defaults:
