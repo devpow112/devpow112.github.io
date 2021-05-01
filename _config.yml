@@ -16,6 +16,9 @@ plugins:
 include:
   - _pages
 exclude:
+  - Gemfile
+  - Gemfile.lock
+  - LICENSE
   - README.md
 defaults:
   - scope:
