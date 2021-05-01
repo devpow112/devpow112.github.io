@@ -1,0 +1,13 @@
+version: 2
+updates:
+  - package-ecosystem: bundler
+    directory: /
+    schedule:
+      interval: daily
+    versioning-strategy: increase
+    rebase-strategy: auto
+    labels:
+      - auto
+      - dependencies
+    reviewers:
+      - devpow112
