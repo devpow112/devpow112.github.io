@@ -18,6 +18,7 @@ include:
 defaults:
   - scope:
       path: _pages
+      type: pages
       layout: page
     values:
       permalink: /:basename
