@@ -27,9 +27,14 @@ defaults:
   - scope:
       path: _pages
       type: pages
-      layout: page
     values:
+      layout: page
       permalink: /:basename
+  - scope:
+      path: _posts
+      type: posts
+    values:
+      layout: post
 
 # minima settings
 minima:
