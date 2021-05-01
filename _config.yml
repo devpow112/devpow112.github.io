@@ -6,6 +6,7 @@ author:
   email: devon.f.powell@gmail.com
 header_pages:
   - _pages/about.md
+show_excerpts: true
 
 # build settings
 remote_theme: jekyll/minima
