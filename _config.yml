@@ -1,0 +1,29 @@
+# site settings
+title: Devon Powell
+description: ""
+author:
+  name: Devon Powell
+  email: devon.f.powell@gmail.com
+header_pages:
+  - _pages/about.md
+
+# build settings
+theme: minima
+plugins:
+  - jekyll-feed
+include:
+  - _pages
+defaults:
+  - scope:
+      path: _pages
+      layout: page
+    values:
+      permalink: /:basename
+
+# minima settings
+minima:
+  skin: dark
+  social_links:
+    twitter: devpow112
+    github: devpow112
+    linkedin: devpow112
