@@ -48,6 +48,10 @@ minima:
   social_links:
     github: devpow112
     linkedin: devpow112
+    facebook: devpow112
+    twitter: devpow112
+    stackoverflow: "15813146"
+    youtube: devpow112
 
 # sass converter
 sass:
