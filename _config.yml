@@ -44,3 +44,7 @@ minima:
   social_links:
     github: devpow112
     linkedin: devpow112
+
+# sass converter
+sass:
+  style: compressed
