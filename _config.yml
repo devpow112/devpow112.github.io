@@ -13,6 +13,7 @@ show_excerpts: true
 
 # build settings
 remote_theme: jekyll/minima
+strict_front_matter: true
 plugins:
   - jekyll-feed
   - jekyll-remote-theme
@@ -23,6 +24,7 @@ exclude:
   - Gemfile.lock
   - LICENSE
   - README.md
+  - vendor
 defaults:
   - scope:
       path: _pages
@@ -40,6 +42,5 @@ defaults:
 minima:
   skin: dark
   social_links:
-    twitter: devpow112
     github: devpow112
     linkedin: devpow112
