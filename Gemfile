@@ -6,7 +6,6 @@ gem "github-pages", "~> 214", group: :jekyll_plugins
 group :jekyll_plugins do
   gem "jekyll-feed", "~> 0.15.1"
   gem "jekyll-remote-theme", "~> 0.4.3"
-  gem "jekyll-minifier", "~> 0.1.10"
 end
 
 platforms :mingw, :x64_mingw, :mswin, :jruby do
