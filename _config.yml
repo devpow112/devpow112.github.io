@@ -17,6 +17,7 @@ strict_front_matter: true
 plugins:
   - jekyll-feed
   - jekyll-remote-theme
+  - jekyll-minifier
 include:
   - _pages
 exclude:
