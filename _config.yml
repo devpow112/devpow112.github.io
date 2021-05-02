@@ -25,6 +25,10 @@ exclude:
   - LICENSE
   - README.md
   - vendor
+collections:
+  assets:
+    permalink: /:path
+    output: true
 defaults:
   - scope:
       path: _pages
