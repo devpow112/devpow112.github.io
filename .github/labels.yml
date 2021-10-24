@@ -35,7 +35,7 @@
   description: Further information is requested
   color: d876e3
 - name: ruby
-  description: Pull requests that updates Ruby code
+  description: Pull requests that update Ruby code
   color: ce2d2d
 - name: won't fix
   description: This will not be worked on
