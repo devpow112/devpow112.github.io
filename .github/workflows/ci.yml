@@ -1,0 +1,31 @@
+name: Release
+on:
+  workflow_call:
+permissions:
+  contents: read
+concurrency: release
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3.0.2
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1.115.3
+        with:
+          bundler-cache: true
+      - name: Set up Pages
+        uses: actions/configure-pages@v2.1.0
+        id: pages
+      - name: Build
+        run: >
+          bundle exec jekyll build
+          --baseurl '${{steps.pages.outputs.base_path}}'
+        env:
+          JEKYLL_ENV: production
+          JEKYLL_GITHUB_TOKEN: ${{github.token}}
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v1.0.4
+        if: github.event_name != 'pull_request'
