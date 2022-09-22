@@ -4,6 +4,17 @@ on:
 permissions:
   contents: read
 jobs:
+  check-formatting-markdown:
+    name: Check Formatting (Markdown)
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3.0.2
+      - name: Check formatting
+        uses: davidanson/markdownlint-cli2-action@v7.0.0
+        with:
+          globs: '**/*.md'
   build:
     name: Build
     runs-on: ubuntu-latest
