@@ -1,9 +1,8 @@
-name: Release
+name: CI
 on:
   workflow_call:
 permissions:
   contents: read
-concurrency: release
 jobs:
   build:
     name: Build
