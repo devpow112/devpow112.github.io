@@ -24,3 +24,4 @@ jobs:
     steps:
       - name: Deploy to GitHub Pages
         uses: actions/deploy-pages@v1.2.0
+        id: deployment
