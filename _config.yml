@@ -51,7 +51,7 @@ minima:
       user_url: https://github.com/devpow112
     - platform: linkedin
       user_url: https://linkedin.com/in/devpow112
-    - platform: facebook:
+    - platform: facebook
       user_url: https://facebook.com/devpow112
     - platform: twitter
       user_url: https://twitter.com/devpow112
