@@ -47,6 +47,7 @@ defaults:
 minima:
   skin: dark
   social_links:
+    - platform: rss
     - platform: github
       user_url: https://github.com/devpow112
     - platform: linkedin
