@@ -47,12 +47,18 @@ defaults:
 minima:
   skin: dark
   social_links:
-    github: devpow112
-    linkedin: devpow112
-    facebook: devpow112
-    twitter: devpow112
-    stackoverflow: "15813146"
-    youtube: devpow112
+    - platform: github
+      user_url: https://github.com/devpow112
+    - platform: linkedin
+      user_url: https://linkedin.com/in/devpow112
+    - platform: facebook:
+      user_url: https://facebook.com/devpow112
+    - platform: twitter
+      user_url: https://twitter.com/devpow112
+    - platform: stackoverflow
+      user_url: https://stackoverflow.com/users/15813146
+    - platform: youtube
+      user_url: https://www.youtube.com/devpow112
 
 # sass converter
 sass:
