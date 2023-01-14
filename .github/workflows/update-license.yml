@@ -20,7 +20,7 @@ jobs:
           persist-credentials: false
       - name: Determine year
         id: year
-        run: echo "::set-output name=value::$(date +%Y)"
+        run: echo "value=$(date +%Y)" >> $GITHUB_OUTPUT
       - name: Update LICENSE
         run: sed -i -E "s/$REGEX/\1${{steps.year.outputs.value}}\2/" LICENSE
         env:
