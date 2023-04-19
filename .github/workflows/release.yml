@@ -23,5 +23,5 @@ jobs:
     needs: ci
     steps:
       - name: Deploy to GitHub Pages
-        uses: actions/deploy-pages@v2.0.0
+        uses: actions/deploy-pages@v2.0.1
         id: deployment
