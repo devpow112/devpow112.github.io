@@ -27,7 +27,7 @@ jobs:
         with:
           bundler-cache: true
       - name: Set up Pages
-        uses: actions/configure-pages@v3.0.6
+        uses: actions/configure-pages@v4.0.0
         id: pages
       - name: Build
         run: >
