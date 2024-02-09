@@ -37,5 +37,5 @@ jobs:
           JEKYLL_ENV: production
           JEKYLL_GITHUB_TOKEN: ${{github.token}}
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3.0.0
+        uses: actions/upload-pages-artifact@v3.0.1
         if: github.event_name != 'pull_request'
