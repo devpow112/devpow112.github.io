@@ -5,42 +5,70 @@ on:
     paths: .github/workflows/update-license.yml
   schedule:
     - cron: '0 0 1 1 *'
+  workflow_dispatch:
 permissions:
-  contents: write
+  contents: read
 concurrency: update-license
 jobs:
   update-license:
     name: Update License
     runs-on: ubuntu-latest
     timeout-minutes: 5
+    env:
+      REGEX: ^(Copyright \(c\) )[0-9]{4}( Devon Powell)$
     steps:
       - name: Checkout
         uses: actions/checkout@v4.2.2
-        with:
-          persist-credentials: false
-      - name: Determine year
-        id: year
-        run: echo "value=$(date +%Y)" >> $GITHUB_OUTPUT
+      - name: Determine info
+        shell: bash
+        id: info
+        run: |
+          OLD_YEAR=$(grep -oEi "$REGEX" LICENSE | grep -oEi '[0-9]{4}')
+          NEW_YEAR=$(date +%Y)
+          UPDATE_TITLE="Bump LICENSE year from $OLD_YEAR to $NEW_YEAR"
+          UPDATE_BODY="$UPDATE_TITLE."
+          echo "license-year=$NEW_YEAR" >> $GITHUB_OUTPUT
+          echo "update-title=$UPDATE_TITLE" >> $GITHUB_OUTPUT
+          echo "update-body=$UPDATE_BODY" >> $GITHUB_OUTPUT
       - name: Update LICENSE
-        run: sed -i -E "s/$REGEX/\1${{steps.year.outputs.value}}\2/" LICENSE
+        run: |
+          sed -i -E "s/$REGEX/\1${{steps.info.outputs.license-year}}\2/" LICENSE
+      - name: Generate app token
+        id: app-token
+        uses: actions/create-github-app-token@v1.11.0
+        with:
+          app-id: ${{secrets.GH_APP_ID}}
+          private-key: ${{secrets.GH_APP_PRIVATE_KEY}}
+      - name: Generate user info
+        id: user-info
+        run: |
+          USER_NAME="$GH_APP_SLUG[bot]"
+          USER_ID=$(gh api "/users/$USER_NAME" --jq .id)
+          USER_EMAIL="$USER_ID+$USER_NAME@users.noreply.github.com"
+          echo "id=$USER_ID" >> $GITHUB_OUTPUT
+          echo "name=$USER_NAME" >> $GITHUB_OUTPUT
+          echo "email=$USER_ID+$USER_NAME@users.noreply.github.com" >> $GITHUB_OUTPUT
+          echo "commit-author=$USER_NAME <$USER_EMAIL>" >> $GITHUB_OUTPUT
         env:
-          REGEX: ^(Copyright \(c\) )[0-9]{4}( Devon Powell)$
-      - name: Check for changes
+          GH_APP_SLUG: ${{steps.app-token.outputs.app-slug}}
+          GH_TOKEN: ${{steps.app-token.outputs.token}}
+      - name: Handle changes
+        uses: peter-evans/create-pull-request@v7.0.5
         id: changes
-        run: |
-          git diff --exit-code LICENSE || echo '::set-output name=exist::true'
-      - name: Push commit
-        if: steps.changes.outputs.exist
-        run: |
-          git config user.name $COMMIT_USERNAME
-          git config user.email $COMMIT_EMAIL
-          git add LICENSE
-          git commit -m 'Update license year to ${{steps.year.outputs.value}}'
-          CREDENTIALS="x-access-token:$GITHUB_TOKEN"
-          URL="https://$CREDENTIALS@github.com/${{github.repository}}.git"
-          git remote set-url origin $URL
-          git push origin main
+        with:
+          token: ${{steps.app-token.outputs.token}}
+          commit-message: ${{steps.info.outputs.update-title}}
+          author: ${{steps.user-info.outputs.commit-author}}
+          committer: ${{steps.user-info.outputs.commit-author}}
+          add-paths: LICENSE
+          branch: auto/update-license
+          delete-branch: true
+          title: ${{steps.info.outputs.update-title}}
+          body: ${{steps.info.outputs.update-body}}
+          labels: auto
+      - name: Enable auto-merge
+        if: steps.changes.outputs.pull-request-operation == 'created'
+        run: gh pr merge --auto --squash "$PULL_REQUEST_URL"
         env:
-          GITHUB_TOKEN: ${{secrets.PERSONAL_GITHUB_TOKEN}}
-          COMMIT_USERNAME: github-actions[bot]
-          COMMIT_EMAIL: 41898282+github-actions[bot]@users.noreply.github.com
+          PULL_REQUEST_URL: ${{steps.changes.outputs.pull-request-url}}
+          GITHUB_TOKEN: ${{steps.app-token.outputs.token}}
