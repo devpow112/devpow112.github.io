@@ -13,7 +13,7 @@ header_pages:
 show_excerpts: true
 
 # build settings
-remote_theme: jekyll/minima
+remote_theme: jekyll/minima@0b7ca6b
 strict_front_matter: true
 plugins:
   - jekyll-feed
@@ -47,20 +47,18 @@ defaults:
 minima:
   skin: dark
   social_links:
-    - platform: rss
-      user_url: https://devpow112.github.io/feed.xml
-    - platform: github
-      user_url: https://github.com/devpow112
-    - platform: linkedin
-      user_url: https://linkedin.com/in/devpow112
-    - platform: facebook
-      user_url: https://facebook.com/devpow112
-    - platform: twitter
-      user_url: https://twitter.com/devpow112
-    - platform: stackoverflow
-      user_url: https://stackoverflow.com/users/15813146
-    - platform: youtube
-      user_url: https://youtube.com/devpow112
+    - icon: github
+      url: https://github.com/devpow112
+    - icon: linkedin
+      url: https://linkedin.com/in/devpow112
+    - icon: facebook
+      url: https://facebook.com/devpow112
+    - icon: x-twitter
+      url: https://x.com/devpow112
+    - icon: stack-overflow
+      url: https://stackoverflow.com/users/15813146
+    - icon: youtube
+      url: https://youtube.com/devpow112
 
 # sass converter
 sass:
