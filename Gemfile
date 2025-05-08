@@ -12,4 +12,4 @@ platforms :mingw, :x64_mingw, :mswin, :jruby do
   gem "tzinfo-data", "~> 1.2025.2"
 end
 
-gem "wdm", "~> 0.1.1", :install_if => Gem.win_platform?
+gem "wdm", "~> 0.2.0", :install_if => Gem.win_platform?
