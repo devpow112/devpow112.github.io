@@ -10,9 +10,9 @@ jobs:
     timeout-minutes: 5
     steps:
       - name: Checkout
-        uses: actions/checkout@v7.0.0
+        uses: actions/checkout@v7
       - name: Check formatting
-        uses: davidanson/markdownlint-cli2-action@v23.2.0
+        uses: davidanson/markdownlint-cli2-action@v23
         with:
           globs: '**/*.md'
   build:
@@ -21,13 +21,13 @@ jobs:
     timeout-minutes: 15
     steps:
       - name: Checkout
-        uses: actions/checkout@v7.0.0
+        uses: actions/checkout@v7
       - name: Set up Ruby
-        uses: ruby/setup-ruby@v1.314.0
+        uses: ruby/setup-ruby@v1
         with:
           bundler-cache: true
       - name: Set up Pages
-        uses: actions/configure-pages@v6.0.0
+        uses: actions/configure-pages@v6
         id: pages
       - name: Build
         run: >
@@ -37,5 +37,5 @@ jobs:
           JEKYLL_ENV: production
           JEKYLL_GITHUB_TOKEN: ${{github.token}}
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v5.0.0
+        uses: actions/upload-pages-artifact@v5
         if: github.event_name != 'pull_request'
